@@ -1,8 +1,11 @@
 {
+  "": "",
   "decrement": "decrement",
   "increment": "increment",
   "throw error": "throw error",
   "toggle": "toggle",
+  "Введите username": "Введите username",
+  "Введите пароль": "Введите пароль",
   "Войти": "Log in",
   "Главная": "Главная",
   "Главная страница": "Главная страница",
