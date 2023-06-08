@@ -11,5 +11,10 @@
   "toggle": "toggle",
   "О сайте": "About us",
   "Короткий язык": "En",
-  "Войти": "Войти"
+  "Войти": "Log in",
+  "Введите username": "Enter username",
+  "Введите пароль": "Enter password",
+  "Форма авторизации": "Auth Form",
+  "Вы ввели неверный пароль или логин": "Wrong password or login",
+  "Выйти": "Выйти"
 }
