@@ -1,19 +1,32 @@
-import HTMLWebPackPlugin from "html-webpack-plugin";
-import path from "path";
-import webpack from "webpack";
-import {BuildOptions} from "./types/config";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import HTMLWebPackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { BuildOptions } from './types/config';
 
-export function buildPlugins({paths}: BuildOptions): webpack.WebpackPluginInstance[] {
-
-    return [
+export function buildPlugins({ paths, isDev, apiUrl }: BuildOptions): webpack.WebpackPluginInstance[] {
+    const plugins = [
         new HTMLWebPackPlugin({
-            template: paths.html
+            template: paths.html,
         }),
         new webpack.ProgressPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[contenthash:8].css',
-            chunkFilename: 'css/[name].[contenthash:8].css'
-        })
-    ]
+            chunkFilename: 'css/[name].[contenthash:8].css',
+        }),
+        new webpack.DefinePlugin({
+            __IS_DEV__: JSON.stringify(isDev),
+            __API__: JSON.stringify(apiUrl),
+        }),
+    ];
+
+    if (isDev) {
+        plugins.push(new webpack.HotModuleReplacementPlugin());
+        plugins.push(new BundleAnalyzerPlugin({
+            openAnalyzer: false,
+            analyzerPort: 4433,
+        }));
+    }
+
+    return plugins;
 }
